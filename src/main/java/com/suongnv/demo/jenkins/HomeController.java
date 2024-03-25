@@ -11,7 +11,7 @@ public class HomeController {
 
     @GetMapping("/greeting")
     public String getGreeting(@RequestParam(defaultValue = "world") String name) {
-        log.info("name: {}", name);
+        log.info("param name: {}", name);
         return "Hello " + name;
     }
 }
