@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+    }
+    stages {
+        stage('clone code') {
+            steps {
+                sh 'echo checkout github'
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-password', url: 'https://github.com/suongisme/demo-jenkins.git']])
+            }
+        }
+
+        stage('build code') {
+            steps {
+                sh 'mvn clean package -Dmaven.test.skip=true'
+                sh 'pwd'
+            }
+        }
+
+        stage('deploy code') {
+            steps {
+                sh 'echo deploy code'
+            }
+        }
+    }
+}
